@@ -1,3 +1,9 @@
+# Pycharm
+.idea
+
+# pycache
+*/__pycache__
+
 # Data
 data/
 
