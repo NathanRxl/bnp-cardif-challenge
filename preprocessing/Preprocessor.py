@@ -1,3 +1,6 @@
+import numpy as np
+
+
 class Preprocessor:
 
     def __init__(self):
@@ -21,15 +24,22 @@ class Preprocessor:
         )
         # Compute the likelihood mapping
         categorical_likelihood_mapping = dict()
+        c_feature_median = list()
         c_feature_unique_categories = df_to_transform[c_feature].unique()
         for category in c_feature_unique_categories:
             try:
                 category_occurences = df_group_by_category_label[category].sum()
-                categorical_likelihood_mapping[category] = (
-                    float(df_group_by_category_label[category][1]) / category_occurences
-                )
+                category_label_one_frequency = float(df_group_by_category_label[category][1]) / category_occurences
+                categorical_likelihood_mapping[category] = category_label_one_frequency
+                c_feature_median.append(category_label_one_frequency)
             except KeyError:
                 categorical_likelihood_mapping[category] = 0.0
+                c_feature_median.append(0.0)
+
+        # Fill possible new categories (not present in the categorical likelihood) by the median
+        # Typically, in test, 40 new users appear in v22 : we fill them by the median likelihood of all other users
+        categorical_likelihood_mapping["median"] = np.median(c_feature_median)
+
         return categorical_likelihood_mapping
 
     def preprocess_categorical_data(self, train_or_test, df_to_preprocess):
@@ -52,6 +62,9 @@ class Preprocessor:
 
             # Preprocessing on-the-fly
             df_transformed[c_feature] = df_transformed[c_feature].map(self.categorical_likelihood_mapping[c_feature])
+            df_transformed[c_feature] = df_transformed[c_feature].fillna(
+                value=self.categorical_likelihood_mapping[c_feature]["median"], inplace=False
+            )
 
         return df_transformed
 
