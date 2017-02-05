@@ -2,7 +2,7 @@
 .idea
 
 # pycache
-*/__pycache__
+*__pycache__*
 
 # Data
 data/
