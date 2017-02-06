@@ -40,12 +40,12 @@ print("\tMake predictions on test data ... ", end="", flush=True)
 y_pred_proba = cardif_model.predict_proba(X_test)
 
 # Save the predictions
-submissioner.save(y_pred_proba)
+# submissioner.save(y_pred_proba)
 print("OK", end="\n\n")
 
 # Create submission file
 print("\tCreate submission file ... ", end="", flush=True)
-submissioner.create_submission()
+submissioner.create_submission(y_pred_proba)
 print("OK")
 
 print("\nPipeline completed in %0.2f seconds" % (time() - initial_time))
