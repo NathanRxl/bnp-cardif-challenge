@@ -71,12 +71,12 @@ class Preprocessor:
     def preprocess_data(self, train_or_test, df_to_preprocess, verbose=True):
 
         if verbose:
-            print("\t Preprocessing numerical data ... ", end="", flush=True)
+            print("\t\tPreprocessing numerical data ... ", end="", flush=True)
 
         df_numerical_transformed = self.preprocess_numerical_data(train_or_test, df_to_preprocess)
         if verbose:
             print("OK", flush=True)
-            print("\t Preprocessing categorical data ... ", end="", flush=True)
+            print("\t\tPreprocessing categorical data ... ", end="", flush=True)
         df_numerical_categorical_transformed = self.preprocess_categorical_data(train_or_test, df_numerical_transformed)
         if verbose:
             print("OK", flush=True)

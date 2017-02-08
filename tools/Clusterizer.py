@@ -8,8 +8,8 @@ class Clusterizer:
         self._nan_label = nan_label
         self._threshold = threshold
 
-    def clusterize(self, data_frame, save=False, path_low='', path_high=''):
-        df = self._add_nan_count(data_frame)
+    def clusterize(self, df_to_clusterize, save=False, path_low='', path_high=''):
+        df = self._add_nan_count(df_to_clusterize)
         df_low_nan = df[df[self._nan_label] < self._threshold]
         df_high_nan = df[df[self._nan_label] >= self._threshold]
         if save:
