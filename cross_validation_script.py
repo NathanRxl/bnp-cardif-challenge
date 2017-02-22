@@ -12,7 +12,7 @@ initial_time = time()
 print("Cross-validation script", end="\n\n")
 
 # Load train data
-train_path = "data/preprocessed_train.csv"
+train_path = "data/train_stacked.csv"
 train_df = pd.read_csv(train_path, index_col='ID')
 # Split train data in X_train, y_train
 X_train = train_df.drop('target', axis=1)
@@ -25,7 +25,7 @@ cv_scores = []
 cv_splits = kf.split(X_train.index.tolist())
 
 # Define the model
-model = models.LogReg()
+model = models.Stacking()
 
 for n_fold, (train_fold_idx, test_fold_idx) in enumerate(cv_splits):
 

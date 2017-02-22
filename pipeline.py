@@ -15,7 +15,7 @@ submissioner = Submissioner()
 
 # Load train data
 print("\tLoad train data ... ", end="", flush=True)
-train_path = "data/preprocessed_train.csv"
+train_path = "data/train_stacked.csv"
 train_df = pd.read_csv(train_path, index_col='ID')
 # Split train data in X_train, y_train
 X_train = train_df.drop('target', axis=1).values
@@ -24,7 +24,7 @@ print("OK")
 
 # Initiate the predictor
 print("\tInitiate the predictor and fit the train data ... ", end="", flush=True)
-cardif_model = models.LogReg()
+cardif_model = models.Stacking()
 
 # Fit the predictor to the train data
 cardif_model.fit(X_train, y_train)
@@ -40,7 +40,7 @@ print(round(train_score, 5), end="\n\n")
 
 # Load test data
 print("\tLoad test data ... ", end="", flush=True)
-test_path = "data/preprocessed_test.csv"
+test_path = "data/test_stacked.csv"
 test_df = pd.read_csv(test_path, index_col='ID')
 X_test = test_df.values
 print("OK")
