@@ -10,7 +10,7 @@ class Submissioner:
     def create_submission(self, y_predict, folder="submissions"):
 
         ID = pd.read_csv("submissions/sample_submission.csv", usecols=["ID"])
-        predicted_prob = pd.DataFrame(y_predict[:, 1], columns=["PredictedProb"])
+        predicted_prob = pd.DataFrame(y_predict, columns=["PredictedProb"])
 
         submission_df = pd.concat([ID, predicted_prob], axis=1)
 
