@@ -1,10 +1,10 @@
 import pandas as pd
 from time import time
 
-from models import LogReg
+import metrics
+import models
 from tools import Submissioner
 
-import metrics
 
 initial_time = time()
 
@@ -24,7 +24,7 @@ print("OK")
 
 # Initiate the predictor
 print("\tInitiate the predictor and fit the train data ... ", end="", flush=True)
-cardif_model = LogReg()
+cardif_model = models.LogReg()
 
 # Fit the predictor to the train data
 cardif_model.fit(X_train, y_train)
